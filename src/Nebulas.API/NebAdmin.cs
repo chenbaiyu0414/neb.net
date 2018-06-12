@@ -27,9 +27,9 @@ namespace Nebulas.API
         /// Return the p2p node info.
         /// </summary>
         /// <returns></returns>
-        public async Task<NodeInfoResponse> GetNodeInfoAsync()
+        public Task<NodeInfoResponse> GetNodeInfoAsync()
         {
-            return await m_provider.SendRequest<NodeInfoResponse>(HttpMethod.Get, "nodeinfo");
+            return m_provider.SendRequest<NodeInfoResponse>(HttpMethod.Get, "nodeinfo");
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Nebulas.API
         /// Return account list.
         /// </summary>
         /// <returns></returns>
-        public async Task<AccountsResponse> GetAccountsAsync()
+        public Task<AccountsResponse> GetAccountsAsync()
         {
-            return await m_provider.SendRequest<AccountsResponse>(HttpMethod.Get, "accounts");
+            return m_provider.SendRequest<AccountsResponse>(HttpMethod.Get, "accounts");
         }
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="passphrase">New account passphrase.</param>
         /// <returns></returns>
-        public async Task<NewAccountResponse> NewAccountAsync(string passphrase)
+        public Task<NewAccountResponse> NewAccountAsync(string passphrase)
         {
             var param = new
             {
                 passphrase
             };
 
-            return await m_provider.SendRequest<NewAccountResponse>(HttpMethod.Post, "account/new", param);
+            return m_provider.SendRequest<NewAccountResponse>(HttpMethod.Post, "account/new", param);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Nebulas.API
         /// <param name="passphrase">UnLock account passphrase.</param>
         /// <param name="duration">Unlock accout duration. The unit is ns (10e-9 s).</param>
         /// <returns></returns>
-        public async Task<UnLockAccountResponse> UnLockAccountAsync(string address, string passphrase, string duration = "30000000000")
+        public Task<UnLockAccountResponse> UnLockAccountAsync(string address, string passphrase, string duration = "30000000000")
         {
             var param = new
             {
@@ -103,7 +103,7 @@ namespace Nebulas.API
                 duration
             };
 
-            return await m_provider.SendRequest<UnLockAccountResponse>(HttpMethod.Post, "account/unlock", param);
+            return m_provider.SendRequest<UnLockAccountResponse>(HttpMethod.Post, "account/unlock", param);
         }
 
         /// <summary>
@@ -121,14 +121,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="address">UnLock account address.</param>
         /// <returns></returns>
-        public async Task<LockAccountResponse> LockAccountAsync(string address)
+        public Task<LockAccountResponse> LockAccountAsync(string address)
         {
             var param = new
             {
                 address
             };
 
-            return await m_provider.SendRequest<LockAccountResponse>(HttpMethod.Post, "account/lock", param);
+            return m_provider.SendRequest<LockAccountResponse>(HttpMethod.Post, "account/lock", param);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Nebulas.API
         /// <param name="transaction">this is the same as the SendTransaction parameters.</param>
         /// <param name="passphrase">from account passphrase</param>
         /// <returns></returns>
-        public async Task<SignTransactionWithPassphraseResponse> SignTransactionWithPassphraseAsync(string transaction, string passphrase)
+        public Task<SignTransactionWithPassphraseResponse> SignTransactionWithPassphraseAsync(string transaction, string passphrase)
         {
             var param = new
             {
@@ -156,7 +156,7 @@ namespace Nebulas.API
                 passphrase
             };
 
-            return await m_provider.SendRequest<SignTransactionWithPassphraseResponse>(HttpMethod.Post, "sign", param);
+            return m_provider.SendRequest<SignTransactionWithPassphraseResponse>(HttpMethod.Post, "sign", param);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Nebulas.API
         /// <param name="transaction">this is the same as the SendTransaction parameters.</param>
         /// <param name="passphrase">from account passphrase</param>
         /// <returns></returns>
-        public async Task<SendTransactionWithPassphraseResponse> SendTransactionWithPassphraseAsync(string transaction, string passphrase)
+        public Task<SendTransactionWithPassphraseResponse> SendTransactionWithPassphraseAsync(string transaction, string passphrase)
         {
             var param = new
             {
@@ -184,7 +184,7 @@ namespace Nebulas.API
                 passphrase
             };
 
-            return await m_provider.SendRequest< SendTransactionWithPassphraseResponse>(HttpMethod.Post, "transactionWithPassphrase", param);
+            return m_provider.SendRequest< SendTransactionWithPassphraseResponse>(HttpMethod.Post, "transactionWithPassphrase", param);
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Nebulas.API
         /// <param name="contract">transaction contract object for deploy/call smart contract. [optional]</param>
         /// <param name="binary">any binary data with a length limit = 64bytes. [optional]</param>
         /// <returns></returns>
-        public async Task<SendTransactionResponse> SendTransactionAsync(string from, string to, string value, int nonce, string gasPrice,
+        public Task<SendTransactionResponse> SendTransactionAsync(string from, string to, string value, int nonce, string gasPrice,
             string gasLimit, string type = null, string contract = null, string binary = null)
         {
             var param = new
@@ -235,7 +235,7 @@ namespace Nebulas.API
                 binary,
             };
 
-            return await m_provider.SendRequest<SendTransactionResponse>(HttpMethod.Post, "transaction", param);
+            return m_provider.SendRequest<SendTransactionResponse>(HttpMethod.Post, "transaction", param);
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Nebulas.API
         /// <param name="hash">A sha3256 hash of the message, base64 encoded.</param>
         /// <param name="alg">Sign algorithm. Default is 1 means SECP256K1</param>
         /// <returns></returns>
-        public async Task<SignHashResponse> SignHashAsync(string address, string hash, int alg = 1)
+        public Task<SignHashResponse> SignHashAsync(string address, string hash, int alg = 1)
         {
             var param = new
             {
@@ -266,7 +266,7 @@ namespace Nebulas.API
                 alg
             };
 
-            return await m_provider.SendRequest< SignHashResponse>(HttpMethod.Post, "sign/hash", param);
+            return m_provider.SendRequest< SignHashResponse>(HttpMethod.Post, "sign/hash", param);
         }
 
         /// <summary>
@@ -284,14 +284,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="listen">the address to listen</param>
         /// <returns></returns>
-        public async Task<StartPprofResponse> StartPprofAsync(string listen)
+        public Task<StartPprofResponse> StartPprofAsync(string listen)
         {
             var param = new
             {
                 listen
             };
 
-            return await m_provider.SendRequest<StartPprofResponse>(HttpMethod.Post, "pprof", param);
+            return m_provider.SendRequest<StartPprofResponse>(HttpMethod.Post, "pprof", param);
         }
 
         /// <summary>
@@ -307,9 +307,9 @@ namespace Nebulas.API
         /// GetConfig return the config current neb is using
         /// </summary>
         /// <returns></returns>
-        public async Task<ConfigResponse> GetConfigAsync()
+        public Task<ConfigResponse> GetConfigAsync()
         {
-            return await m_provider.SendRequest<ConfigResponse>(HttpMethod.Get, "getConfig");
+            return m_provider.SendRequest<ConfigResponse>(HttpMethod.Get, "getConfig");
         }
     }
 }

@@ -27,9 +27,9 @@ namespace Nebulas.API
         /// Return the state of the neb.
         /// </summary>
         /// <returns></returns>
-        public async Task<NebStateResponse> GetNebStateAsync()
+        public Task<NebStateResponse> GetNebStateAsync()
         {
-            return await m_provider.SendRequest<NebStateResponse>(HttpMethod.Get, "nebstate");
+            return m_provider.SendRequest<NebStateResponse>(HttpMethod.Get, "nebstate");
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Nebulas.API
         /// <param name="address">Hex string of the account addresss.</param>
         /// <param name="height">block account state with height. If not specified, use 0 as tail height.</param>
         /// <returns></returns>
-        public async Task<AccountStateResponse> GetAccountStateAsync(string address, int height = 0)
+        public Task<AccountStateResponse> GetAccountStateAsync(string address, int height = 0)
         {
             var param = new
             {
@@ -57,7 +57,7 @@ namespace Nebulas.API
                 height
             };
 
-            return await m_provider.SendRequest<AccountStateResponse>(HttpMethod.Post, "accountstate", param);
+            return m_provider.SendRequest<AccountStateResponse>(HttpMethod.Post, "accountstate", param);
         }
 
         /// <summary>
@@ -73,9 +73,9 @@ namespace Nebulas.API
         /// Return the latest irreversible block.
         /// </summary>
         /// <returns></returns>
-        public async Task<LatestIrreversibleBlockResponse> GetLatestIrreversibleBlockAsync()
+        public Task<LatestIrreversibleBlockResponse> GetLatestIrreversibleBlockAsync()
         {
-            return await m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Get, "lib");
+            return m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Get, "lib");
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Nebulas.API
         /// <param name="contract">transaction contract object for deploy/call smart contract. [optional]</param>
         /// <param name="binary">any binary data with a length limit = 64bytes. [optional]</param>
         /// <returns></returns>
-        public async Task<CallResponse> CallAsync(string from, string to, string value, int nonce, string gasPrice,
+        public Task<CallResponse> CallAsync(string from, string to, string value, int nonce, string gasPrice,
             string gasLimit, string type = null, string contract = null, string binary = null)
         {
             var param = new
@@ -126,7 +126,7 @@ namespace Nebulas.API
                 binary
             };
 
-            return await m_provider.SendRequest<CallResponse>(HttpMethod.Post, "call", param);
+            return m_provider.SendRequest<CallResponse>(HttpMethod.Post, "call", param);
         }
 
         /// <summary>
@@ -144,14 +144,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="data">Signed data of transaction</param>
         /// <returns></returns>
-        public async Task<SendRawTransactionResponse> SendRawTransactionAsync(string data)
+        public Task<SendRawTransactionResponse> SendRawTransactionAsync(string data)
         {
             var param = new
             {
                 data
             };
 
-            return await m_provider.SendRequest<SendRawTransactionResponse>(HttpMethod.Post, "rawtransaction", param);
+            return m_provider.SendRequest<SendRawTransactionResponse>(HttpMethod.Post, "rawtransaction", param);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Nebulas.API
         /// <param name="hash">Hex string of transaction hash.</param>
         /// <param name="isFull">If true it returns the full transaction objects, if false only the hashes of the transactions.</param>
         /// <returns></returns>
-        public async Task<LatestIrreversibleBlockResponse> GetBlockByHashAsync(string hash, bool isFull = false)
+        public Task<LatestIrreversibleBlockResponse> GetBlockByHashAsync(string hash, bool isFull = false)
         {
             var param = new
             {
@@ -179,7 +179,7 @@ namespace Nebulas.API
                 full_fill_transaction = isFull
             };
 
-            return await m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Post, "getBlockByHash", param);
+            return m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Post, "getBlockByHash", param);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace Nebulas.API
         /// <param name="height">Height of transaction hash.</param>
         /// <param name="isFull">If true it returns the full transaction objects, if false only the hashes of the transactions.</param>
         /// <returns></returns>
-        public async Task<LatestIrreversibleBlockResponse> GetBlockByHeightAsync(int height, bool isFull = false)
+        public Task<LatestIrreversibleBlockResponse> GetBlockByHeightAsync(int height, bool isFull = false)
         {
             var param = new
             {
@@ -207,7 +207,7 @@ namespace Nebulas.API
                 full_fill_transaction = isFull
             };
 
-            return await m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Post, "getBlockByHeight", param);
+            return m_provider.SendRequest<LatestIrreversibleBlockResponse>(HttpMethod.Post, "getBlockByHeight", param);
         }
 
         /// <summary>
@@ -225,14 +225,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="hash">Hex string of transaction hash.</param>
         /// <returns></returns>
-        public async Task<TransactionReceiptResponse> GetTransactionReceiptAsync(string hash)
+        public Task<TransactionReceiptResponse> GetTransactionReceiptAsync(string hash)
         {
             var param = new
             {
                 hash
             };
 
-            return await m_provider.SendRequest<TransactionReceiptResponse>(HttpMethod.Post, "getTransactionReceipt", param);
+            return m_provider.SendRequest<TransactionReceiptResponse>(HttpMethod.Post, "getTransactionReceipt", param);
         }
 
 
@@ -251,14 +251,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="address">Hex string of contract account address.</param>
         /// <returns></returns>
-        public async Task<TransactionReceiptResponse> GetTransactionByContractAsync(string address)
+        public Task<TransactionReceiptResponse> GetTransactionByContractAsync(string address)
         {
             var param = new
             {
                 address
             };
 
-            return await m_provider.SendRequest< TransactionReceiptResponse>(HttpMethod.Post, "getTransactionByContract", param);
+            return m_provider.SendRequest< TransactionReceiptResponse>(HttpMethod.Post, "getTransactionByContract", param);
         }
 
         ///// <summary>
@@ -289,9 +289,9 @@ namespace Nebulas.API
         /// Return current gasPrice.
         /// </summary>
         /// <returns></returns>
-        public async Task<GasPriceResponse> GetGasPriceAsync()
+        public Task<GasPriceResponse> GetGasPriceAsync()
         {
-            return await m_provider.SendRequest<GasPriceResponse>(HttpMethod.Get, "getGasPrice");
+            return m_provider.SendRequest<GasPriceResponse>(HttpMethod.Get, "getGasPrice");
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace Nebulas.API
         /// <param name="gasPrice">gasPrice sending with this transaction.</param>
         /// <param name="gasLimit">gasLimit sending with this transaction.</param>
         /// <returns></returns>
-        public async Task<EstimateGasResponse> GetEstimateGasAsync(string from, string to, string value, int nonce, string gasPrice, string gasLimit)
+        public Task<EstimateGasResponse> GetEstimateGasAsync(string from, string to, string value, int nonce, string gasPrice, string gasLimit)
         {
             var param = new
             {
@@ -331,7 +331,7 @@ namespace Nebulas.API
                 gasLimit
             };
 
-            return await m_provider.SendRequest<EstimateGasResponse>(HttpMethod.Post, "estimateGas", param);
+            return m_provider.SendRequest<EstimateGasResponse>(HttpMethod.Post, "estimateGas", param);
         }
 
         /// <summary>
@@ -349,14 +349,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="hash">Hex string of transaction hash.</param>
         /// <returns></returns>
-        public async Task<EventsByHashResponse> GetEventsByHashAsync(string hash)
+        public Task<EventsByHashResponse> GetEventsByHashAsync(string hash)
         {
             var param = new
             {
                 hash
             };
 
-            return await m_provider.SendRequest<EventsByHashResponse>(HttpMethod.Post, "getEventsByHash", param);
+            return m_provider.SendRequest<EventsByHashResponse>(HttpMethod.Post, "getEventsByHash", param);
         }
 
         /// <summary>
@@ -374,14 +374,14 @@ namespace Nebulas.API
         /// </summary>
         /// <param name="height">block height</param>
         /// <returns></returns>
-        public async Task<DynastyResponse> GetDynastyAsync(int height)
+        public Task<DynastyResponse> GetDynastyAsync(int height)
         {
             var param = new
             {
                 height
             };
 
-            return await m_provider.SendRequest<DynastyResponse>(HttpMethod.Post, "dynasty", param);
+            return m_provider.SendRequest<DynastyResponse>(HttpMethod.Post, "dynasty", param);
         }
     }
 }
