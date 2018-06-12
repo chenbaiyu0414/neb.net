@@ -261,20 +261,15 @@ namespace Nebulas.API
             return m_provider.SendRequest< TransactionReceiptResponse>(HttpMethod.Post, "getTransactionByContract", param);
         }
 
-        ///// <summary>
-        ///// Return the subscribed events of transaction & block. The request is a keep-alive connection.
-        ///// </summary>
-        ///// <param name="topicList">repeated event topic name, string array.</param>
-        ///// <returns></returns>
-        //public async Task<Stream> Subscribe(params string[] topicList)
-        //{
-        //    var param = new
-        //    {
-        //        topics = topicList
-        //    };
-
-        //    return await SendRequestWithStreamResponse(HttpMethod.Post, "subscribe", param);
-        //}
+        /// <summary>
+        /// Return the subscribed events of transaction & block. The request is a keep-alive connection.
+        /// </summary>
+        /// <param name="topicList">repeated event topic name, string array.</param>
+        /// <returns></returns>
+        public void Subscribe(params string[] topicList)
+        {
+            throw new System.NotSupportedException();
+        }
 
         /// <summary>
         /// Return current gasPrice.
